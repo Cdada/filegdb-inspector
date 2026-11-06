@@ -1,0 +1,4 @@
+# No pip-only dependencies. Python 3.10+ and GDAL 3.6+ with osgeo/OpenFileGDB.
+# macOS: use QGIS bundled Python via start.command.
+# Linux: use distribution packages matching the Python interpreter.
+# GDAL is intentionally not pinned here: bindings must match the native library.
