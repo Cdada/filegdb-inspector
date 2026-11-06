@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       PYTHONDONTWRITEBYTECODE: '1'
-      GDB_INSPECTOR_RUNTIME_DIR: ${{ runner.temp }}/filegdb-inspector-runtime
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,6 +22,8 @@ jobs:
           bash -n start.sh start.command
           node --check static/app.js
       - name: Test with synthetic data only
+        env:
+          GDB_INSPECTOR_RUNTIME_DIR: ${{ runner.temp }}/filegdb-inspector-runtime
         run: /usr/bin/python3 -B -m unittest discover -s . -p 'test_*.py' -v
       - name: Validate source archive
         run: /usr/bin/python3 scripts/build_release.py --output-dir "${RUNNER_TEMP}/filegdb-release"
